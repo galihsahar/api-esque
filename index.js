@@ -15,11 +15,31 @@ app.get('/', (request, response) => {
     response.json({ info: 'Node.js, Express, and Postgres API' })
 })
 
-app.get('/users', db.getUsers)
-app.get('/users/:id', db.getUserById)
-app.post('/users', db.createUser)
-app.put('/users/:id', db.updateUser)
-app.delete('/users/:id', db.deleteUser)
+app.get('/user/findByUserName', db.getUserByUsername)
+
+//achievement
+app.get('/achievement/findAllOrderBy', db.getDataAchievement)
+app.post('/achievement/post', db.addDataAchievement);
+app.put('/achievement/update', db.editDataAchievement);
+app.delete('/achievement/delete', db.deleteDataAchievement);
+
+//activitys
+app.get('/activity/findAllOrderBy', db.getDataActivity);
+app.post('/activity/post', db.addDataActivity);
+app.put('/activity/update', db.editDataActivity);
+app.delete('/activity/delete', db.deleteDataActivity);
+
+//blog
+app.get('/blog/findAllOrderBy', db.getDataBlog);
+app.post('/blog/post', db.addDataBlog);
+app.put('/blog/update', db.editDataBlog);
+app.delete('/blog/delete', db.deleteDataBlog);
+
+//team
+app.get('/team/findAllOrderBy', db.getDataTeam);
+app.post('/team/post', db.addDataTeam);
+app.put('/team/update', db.editDataTeam);
+app.delete('/team/delete', db.deleteDataTeam);
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
