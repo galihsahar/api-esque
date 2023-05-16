@@ -223,7 +223,8 @@ const getDataTeam = (request, response) => {
                 teamId: result.team_id,
                 url: result.url,
                 title: result.title,
-                textTeam: result.text_team
+                textAchievement: result.text_achievement,
+                positions: result.positions
             }
         })
         response.status(200).json({
@@ -235,9 +236,9 @@ const getDataTeam = (request, response) => {
 }
 
 const addDataTeam = (request, response) => {
-    const { url, title, textTeam, positions } = request.body
+    const { url, title, textAchievement, positions } = request.body
 
-    pool.query('INSERT INTO Teams (url, title, text_team, positions) VALUES ($1, $2, $3, $4) RETURNING *', [url, title, textTeam, positions], (error, results) => {
+    pool.query('INSERT INTO Teams (url, title, text_achievement, positions) VALUES ($1, $2, $3, $4) RETURNING *', [url, title, textAchievement, positions], (error, results) => {
         if (error) {
             throw error
         }
@@ -250,8 +251,8 @@ const editDataTeam = (request, response) => {
     const { url, title, textTeam, positions } = request.body
 
     pool.query(
-        'UPDATE Teams SET url = $1, title = $2, text_team = $3, positions = $4  WHERE team_id = $5',
-        [url, title, textTeam, positions, teamId],
+        'UPDATE Teams SET url = $1, title = $2, text_achievement = $3, positions = $4  WHERE team_id = $5',
+        [url, title, textAchievement, positions, teamId],
         (error, results) => {
             if (error) {
                 throw error
